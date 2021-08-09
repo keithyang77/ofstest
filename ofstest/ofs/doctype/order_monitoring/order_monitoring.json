@@ -1,0 +1,94 @@
+{
+ "actions": [],
+ "autoname": "field:orderid",
+ "creation": "2021-06-30 16:06:55.826789",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "orderid",
+  "status",
+  "orderitems",
+  "orderamount",
+  "customer",
+  "salesorder",
+  "datecreated",
+  "store",
+  "woocommerceid"
+ ],
+ "fields": [
+  {
+   "fieldname": "orderid",
+   "fieldtype": "Data",
+   "label": "Order ID",
+   "unique": 1
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Data",
+   "label": "Status"
+  },
+  {
+   "fieldname": "orderitems",
+   "fieldtype": "Text",
+   "label": "Order Items"
+  },
+  {
+   "fieldname": "orderamount",
+   "fieldtype": "Data",
+   "label": "Order Amount"
+  },
+  {
+   "fieldname": "customer",
+   "fieldtype": "Link",
+   "label": "Customer",
+   "options": "Customer"
+  },
+  {
+   "fieldname": "salesorder",
+   "fieldtype": "Link",
+   "label": "Sales Order",
+   "options": "Sales Order"
+  },
+  {
+   "fieldname": "datecreated",
+   "fieldtype": "Date",
+   "label": "Date Created"
+  },
+  {
+   "fieldname": "store",
+   "fieldtype": "Link",
+   "label": "Store",
+   "options": "Store"
+  },
+  {
+   "fieldname": "woocommerceid",
+   "fieldtype": "Data",
+   "label": "Woocommerce ID"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2021-08-04 14:46:37.159585",
+ "modified_by": "Administrator",
+ "module": "OFS",
+ "name": "Order Monitoring",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}
