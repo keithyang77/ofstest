@@ -34,7 +34,7 @@ def populate_ofs_orders(ordernum, status, amount, woocommerceids, salesorders):
 				'status': status[i], 
 				'orderamount': amount[i],
 				'woocommerceid': woocommerceids[i],
-				'salesorder': frappe.get_doc('Sales Order', str(salesorders))
+				'salesorder': salesorders
 			})
 			order.insert(ignore_permissions=True)
 	frappe.db.commit()
