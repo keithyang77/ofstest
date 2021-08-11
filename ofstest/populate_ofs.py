@@ -3,7 +3,7 @@ import frappe
 
 def table_from_ofs(column_name, date):
 	mydb = mysql.connector.connect(
-		host="52.76.52.18",
+		host="172.26.2.28",
 		user="root",
 		password="i5ECPIo4znoy4Ea",
 		database="ofs_shg"
