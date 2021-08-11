@@ -17,7 +17,7 @@ def table_from_ofs(column_name, date):
 def get_sales_doctype(woocommerceids):
 	#salesorders = [0] * len(woocommerceids)
 	#for i in range(len(woocommerceids)):
-	name = frappe.db.get_value('Sales Order', {'woocommerceid': 6722}, 'name')
+	name = frappe.db.get_value('Sales Order', {'woocommerce_id': 6722}, 'name')
 	salesorder = name
 	return salesorder
 
