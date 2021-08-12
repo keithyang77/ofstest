@@ -17,23 +17,23 @@ def table_from_ofs(column_name, date):
 def get_sales_doctype(woocommerceids):
 	salesorders = [0] * len(woocommerceids)
 	for i in range(len(woocommerceids)):
-		name = frappe.db.get_value('Sales Order', {'woocommerce_id': woocommerceids[i]}, 'name')
+		name = frappe.db.get_value('Sales Order', {'woocommerce_id': woocommerceids[i][0]}, 'name')
 		salesorders[i] = name
 	return salesorders
 
 def populate_ofs_orders(ordernum, status, amount, woocommerceids, salesorders):
 	for i in range(len(status)):
 		try:
-			order = frappe.get_doc('Order Monitoring', str(ordernum[i]))
-			order.status = status[i]
+			order = frappe.get_doc('Order Monitoring', str(ordernum[i][0]))
+			order.status = status[i][0]
 			order.save()
 		except:
 			order = frappe.get_doc({
 				'doctype':'Order Monitoring', 
-				'orderid': ordernum[i],
-				'status': status[i], 
-				'orderamount': amount[i],
-				'woocommerceid': woocommerceids[i],
+				'orderid': ordernum[i][0],
+				'status': status[i][0], 
+				'orderamount': amount[i][0],
+				'woocommerceid': woocommerceids[i][0],
 				'salesorder': salesorders[i]
 			})
 			order.insert(ignore_permissions=True)
