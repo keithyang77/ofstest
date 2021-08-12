@@ -21,7 +21,14 @@ def get_sales_doctype(woocommerceids):
 		salesorders[i] = name
 	return salesorders
 
-def populate_ofs_orders(ordernum, status, amount, woocommerceids, salesorders):
+def get_customer_doctype(salesorders):
+	customers = [0] * len(salesorders)
+	for i in range(len(salesorders)):
+		salesdoc = frappe.get_doc('Sales Order', salesorders[i])
+		customers[i] = salesdoc.customer
+	return customers
+
+def populate_ofs_orders(ordernum, status, amount, woocommerceids, salesorders, customers):
 	for i in range(len(status)):
 		try:
 			order = frappe.get_doc('Order Monitoring', str(ordernum[i][0]))
@@ -34,7 +41,8 @@ def populate_ofs_orders(ordernum, status, amount, woocommerceids, salesorders):
 				'status': status[i][0], 
 				'orderamount': amount[i][0],
 				'woocommerceid': woocommerceids[i][0],
-				'salesorder': salesorders[i]
+				'salesorder': salesorders[i],
+				'customer': customers[i]
 			})
 			order.insert(ignore_permissions=True)
 	frappe.db.commit()
@@ -45,4 +53,5 @@ def main():
 	amount = table_from_ofs("total_gross", "2021-08-03")
 	woocommerceids = table_from_ofs("woocommerce_post_id", "2021-08-03")
 	salesorders = get_sales_doctype(woocommerceids)
-	populate_ofs_orders(ordernum, status, amount, woocommerceids, salesorders)
+	customers = get_customer_doctype(salesorders)
+	populate_ofs_orders(ordernum, status, amount, woocommerceids, salesorders, customers)
