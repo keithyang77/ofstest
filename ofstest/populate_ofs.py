@@ -34,7 +34,7 @@ def get_customer_doctype(salesorders):
 #connect to ofs store table
 def ofs_store_table(column_name, id):
 	mydb = mysql.connector.connect(
-		host="52.76.52.18",
+		host="172.26.2.28",
 		user="keith.yang",
 		password="i5ECPIo4znoy4Ea",
 		database="ofs_shg"
