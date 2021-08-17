@@ -42,13 +42,13 @@ def ofs_store_table(column_name, id):
 
 	mycursor = mydb.cursor()
 	mycursor.execute("select " + column_name + " from ofs_stores where id like " + id)
-	column_data = mycursor.fetchall()
+	column_data = mycursor.fetchone()
 	return column_data
 
 def get_stores(column_name, storeids):
 	array = [0] * len(storeids)
 	for i in range(len(storeids)):
-		array[i] = ofs_store_table(column_name, storeids[i])
+		array[i] = ofs_store_table(column_name, storeids[i][0])[0][0]
 	return array
 
 def get_store_doc(storename, storeid, storecode, storeaddress):
