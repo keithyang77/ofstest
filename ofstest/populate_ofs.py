@@ -53,8 +53,7 @@ def get_stores(column_name, storeids):
 
 def populate_store_doc(storename, storeid, storecode, storeaddress):
 	try:
-		store = frappe.get_doc('Order Monitoring', str(storename))			
-		
+		store = frappe.get_doc('Store', str(storename))			
 	except:
 		store = frappe.get_doc({				
 			'doctype':'Order Monitoring', 
