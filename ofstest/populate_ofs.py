@@ -51,10 +51,10 @@ def get_stores(column_name, storeids):
 		array[i] = ofs_store_table(column_name, str(storeids[i][0]))[0]
 	return array
 
-def get_store_doc(storename, storeid, storecode, storeaddress):
+def populate_store_doc(storename, storeid, storecode, storeaddress):
 	try:
 		store = frappe.get_doc('Order Monitoring', str(storename))			
-		return store.storename
+		
 	except:
 		store = frappe.get_doc({				
 			'doctype':'Order Monitoring', 
@@ -64,10 +64,9 @@ def get_store_doc(storename, storeid, storecode, storeaddress):
 			'address': storeaddress
 		})
 		store.insert(ignore_permissions=True)
-		return store.storename
 frappe.db.commit()
 
-def populate_ofs_orders(ordernum, status, amount, woocommerceids, salesorders, customers, storedocs):
+def populate_ofs_orders(ordernum, status, amount, woocommerceids, salesorders, customers, storenames):
 	for i in range(len(status)):
 		try:
 			order = frappe.get_doc('Order Monitoring', str(ordernum[i][0]))
@@ -82,7 +81,7 @@ def populate_ofs_orders(ordernum, status, amount, woocommerceids, salesorders, c
 				'woocommerceid': woocommerceids[i][0],
 				'salesorder': salesorders[i],
 				'customer': customers[i],
-				'store': storedocs[i]
+				'store': storenames[i]
 			})
 			order.insert(ignore_permissions=True)
 	frappe.db.commit()
@@ -103,6 +102,6 @@ def main():
 
 	storedocs = [0] * len(storeids)
 	for i in range(len(storeids)):
-		storedocs[i] = get_store_doc(storenames[i], storeids[i][0], storecodes[i], storeaddresses[i])
+		populate_store_doc(storenames[i], storeids[i][0], storecodes[i], storeaddresses[i])
 	
-	populate_ofs_orders(ordernum, status, amount, woocommerceids, salesorders, customers, storedocs)
+	populate_ofs_orders(ordernum, status, amount, woocommerceids, salesorders, customers, storenames)
