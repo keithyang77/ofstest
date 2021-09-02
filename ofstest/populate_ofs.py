@@ -1,5 +1,9 @@
 import mysql.connector
 import frappe
+from datetime import date
+
+today = date.today()
+stringdate = today.strftime("%Y-%m-%d")
 
 #connect to ofs order tables
 def table_from_ofs(column_name, date):
@@ -86,15 +90,15 @@ def populate_ofs_orders(ordernum, status, amount, woocommerceids, salesorders, c
 	frappe.db.commit()
 
 def main():
-	ordernum = table_from_ofs("order_number", "2021-08-03")
-	status = table_from_ofs("status_text", "2021-08-03")
-	amount = table_from_ofs("total_gross", "2021-08-03")
-	woocommerceids = table_from_ofs("woocommerce_post_id", "2021-08-03")
+	ordernum = table_from_ofs("order_number", stringdate)
+	status = table_from_ofs("status_text", stringdate)
+	amount = table_from_ofs("total_gross", stringdate)
+	woocommerceids = table_from_ofs("woocommerce_post_id", stringdate)
 	salesorders = get_sales_doctype(woocommerceids)
 	customers = get_customer_doctype(salesorders)
 
 	#getstore
-	storeids = table_from_ofs("store_id", "2021-08-03")
+	storeids = table_from_ofs("store_id", stringdate)
 	storenames = get_stores("store_name", storeids)
 	storecodes = get_stores("code", storeids)
 	storeaddresses = get_stores("address", storeids)
