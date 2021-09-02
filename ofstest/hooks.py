@@ -109,7 +109,14 @@ app_license = "MIT"
 # Scheduled Tasks
 # ---------------
 
-# scheduler_events = {
+scheduler_events = {
+
+    "cron": {
+        "* * * * *": [
+            "ofstest.populate_ofs.main"
+        ]
+    } 
+
 # 	"all": [
 # 		"ofstest.tasks.all"
 # 	],
@@ -125,7 +132,7 @@ app_license = "MIT"
 # 	"monthly": [
 # 		"ofstest.tasks.monthly"
 # 	],
-# }
+}
 
 # Testing
 # -------
